@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Computacion Paralela</title>
+<link href="styles.css" rel="stylesheet" type="text/css" />
+<link rel="icon" href="images/icon.ico" /> 
+<script type="text/javascript" src="iepngfix_tilebg.js"></script> 
+<script type="text/javascript" src="iepngfix.js"></script> 
+<link rel="stylesheet" href="jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="jqwidgets/scripts/gettheme.js"></script>
+    <script type="text/javascript" src="jqwidgets/scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function () {
+                var theme = getDemoTheme();
+                var source = [
+                    "Traspuesta",
+                    "Redimensionar",
+                    "Escala de Grises"
+		        ];
+                // Create a jqxDropDownList
+                $("#jqxWidget").jqxDropDownList({ source: source, selectedIndex: 1, width: '200', height: '25', theme: theme });
+                 $("#jqxButton").jqxButton({ width: '150', theme: theme });
+                
+            });
+        </script>
+</head>
+
+<body>
+<div id="mainWrap">
+<div id="mainPanel">
+ <div id="menu">
+  <ul>
+   <li><a href="#"><span>Home</span></a></li>
+  
+  </ul>
+ </div>
+  <div id="logoWrap"><h1>Tratamiento de Imagenes</h1></div>
+ <div id="loginPanel">
+  <h2>Bienvenido(a)</h2>
+  
+ </div>
+ <div id="quots"><p>"La sabiduria es la clave en la resolución de la vida..."</p></div>
+ <div id="leftPanel">
+  <div class="about">
+   <h2>Complete la Solicitud</h2>
+   <h3>Debe indicar el tipo de tratamiento a implementar en las imágenes.</h3>
+       <table>
+       <tr>
+       <td><p>Seleccione la imagen a tratar:</p><input type="file"/></td>    
+       <td></td>                          
+       </tr>
+       <tr>
+       <td><p>Seleccione el tipo de Tratamiento:</p><div id='jqxWidget'>
+       </div>
+       </td>
+       <td>
+       
+       </td>	
+       </tr> 
+       <tr>
+       <td><br></br></td>
+       </tr>
+       <tr>
+           <td><input type="button" value="Aceptar" id='jqxButton' /></td>
+       </tr>                        
+       </table>
+   <div class="date">
+    <div class="left">Miércoles, Nov 27/2013 &nbsp;&nbsp;|</div>
+    
+   </div>
+  </div>
+  <div class="services">
+  
+  </div>
+  <div class="testimonial">
+   
+  </div>
+ </div>
+ <div id="rightPanel">
+  <h2>Fotos Generadas</h2>
+  <div class="pic1"></div>
+  <a href="#" class="view">view large</a>
+   <div class="pic2"></div>
+  <a href="#" class="view">view large</a>
+   <div class="pic3"></div>
+  <a href="#" class="view">view large</a>
+
+ </div>
+ <div id="footPanel">
+  <div class="nav">
+ <!--  <ul>
+    <li><a href="#">Home</a></li>
+   
+   </ul>-->
+  </div>
+  <div class="copyright">© Copyright Computación Paralela. Todos los derechos Reservados</div>
+  <p class="designInfo">Diseñado por Grupo 4 </p>
+ 
+ </div>
+</div>
+</div>
+</body>
+</html>
