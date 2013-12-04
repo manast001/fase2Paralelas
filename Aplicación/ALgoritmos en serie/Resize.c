@@ -2,9 +2,10 @@
  * 
  * 
  * COMPILACION: $ gcc `Wand-config --cflags --cppflags` redimensionar.c -o redimensionar `Wand-config --ldflags --libs`
- * USO: $ ./redimensionar imagen.bmp salida.bmp
+ * USO: $ ./redimensionar imagen.bmp salida.bmp "porcentaje"
  * 
- * 
+ * 		  ./redimensionar imagen.jpg salida.jpg 50  -> aumento de 50% del tamaño de la imagen.
+ *		  ./redimensionar imagen.jpg salida.jpg -50 -> diminucion de 50% del tamaño de la imagen.
  */
 
 
