@@ -18,8 +18,12 @@ void invertirColores(MagickWand *imagen)
 {
 	PixelIterator *iterator;
 	PixelWand **pixels;
+
+	//red blue t green emulan a un pixel auxiliar
+
 	int red,blue,green,ancho;
 	int ancho2 = MagickGetImageWidth(imagen);
+
 	iterator = NewPixelIterator(imagen);
 	MagickPixelPacket pixel;
 
@@ -27,6 +31,9 @@ void invertirColores(MagickWand *imagen)
 	register ssize_t x;
 	size_t width;
 	ssize_t y;
+
+	//El cambio de pixel se hace inmediatamente entre el primero y el final
+	// por lo que el proceso debe recorrer la mitad de la imagen
 	int fin = (int)( ( ancho2/2 ));
 
 	//******************ITERACION PIXEL POR PIXEL***********************
@@ -37,23 +44,25 @@ void invertirColores(MagickWand *imagen)
 		
 		for (x=0; x <= fin; x++)
 		{
-
+			// obtengo ancho de la imagen
 			ancho=(((ssize_t) width)-x-1);
 
+			//Obtiene pixel de la primera columna en la fila de la imagen
 			PixelGetMagickColor(pixels[x],&pixel);
-			
+			//guarda pixel en variables auxiliares
 			red = pixel.red;
 			green = pixel.green;
 			blue = pixel.blue;
-
+			// Obtiene pixel de la ultima columna de la fila
 			PixelGetMagickColor(pixels[ancho],&pixel);
+			//seteo pixel de la ultima columna en la primera columna			
 			PixelSetMagickColor(pixels[x],&pixel);
 
 
 			pixel.red = red;
 			pixel.green = green;
 			pixel.blue = blue;
-
+			//seteo pixel de la primera columna en la ultima columna de la imagen
 			PixelSetMagickColor(pixels[ancho],&pixel);
 
 
