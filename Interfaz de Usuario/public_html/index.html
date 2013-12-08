@@ -15,19 +15,93 @@
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxscrollbar.js"></script>
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxlistbox.js"></script>
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
-    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxinput.js"></script>
+	 <script type="text/javascript" src="jqwidgets/jqwidgets/jqxpanel.js"></script>
+	 <script type="text/javascript" src="jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+	 <script type="text/javascript" src="jqwidgets/jqwidgets/jqxradiobutton.js"></script>
+	 
+	 <link rel="stylesheet" href="css/lightbox.css" type="text/css" media="screen" />
+	
+	
+	<script src="jquery.lightbox.js" type="text/javascript"></script>
+	
     <script type="text/javascript">
             $(document).ready(function () {
                 var theme = getDemoTheme();
                 var source = [
-                    "Traspuesta",
-                    "Redimensionar",
-                    "Escala de Grises"
+                    "Secuencial",
+                    "Paralelo"
+                    
 		        ];
+				var contador=0;
                 // Create a jqxDropDownList
-                $("#jqxWidget").jqxDropDownList({ source: source, selectedIndex: 1, width: '200', height: '25', theme: theme });
-                 $("#jqxButton").jqxButton({ width: '150', theme: theme });
-                
+                $("#jqxWidget").jqxDropDownList({ source: source,selectedIndex: 0,width: '200', height: '25', theme: theme });
+                $("#jqxButton").jqxButton({ width: '150', theme: theme });
+                $("#jqxWidgetPanel").jqxPanel({ width: 600, height: 160, theme: theme });
+				$("#jqxRadioButton").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton2").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton3").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton4").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton5").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton6").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton7").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton8").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton9").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton10").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton11").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton12").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton13").jqxRadioButton({ width: 140, height: 25, theme: theme });
+			    $(".lightbox").lightbox();
+				
+				$("#jqxButton").on('click', function () {
+				//capturo valores de los inputs
+				var valor_dropdown = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
+				var radio_buttoms= new Array();
+				radio_buttoms[0] = $("#jqxRadioButton").val();
+				radio_buttoms[1] = $("#jqxRadioButton2").val();
+				radio_buttoms[2] =$("#jqxRadioButton3").val();
+				radio_buttoms[3] =$("#jqxRadioButton4").val();
+				radio_buttoms[4] =$("#jqxRadioButton5").val();
+				radio_buttoms[5] =$("#jqxRadioButton6").val();
+				radio_buttoms[6] =$("#jqxRadioButton7").val();
+				radio_buttoms[7] =$("#jqxRadioButton8").val();
+				radio_buttoms[8] =$("#jqxRadioButton9").val();
+				radio_buttoms[9] =$("#jqxRadioButton10").val();
+				radio_buttoms[10] =$("#jqxRadioButton11").val();
+				radio_buttoms[11] =$("#jqxRadioButton12").val();
+				radio_buttoms[12] =$("#jqxRadioButton13").val();
+				//alert(valor_dropdown.index);
+				//alert(valor_dropdown.label);
+				
+				var decision;
+				
+				for(var i=0;i<=12;i++)
+				{
+				 if(radio_buttoms[i]==true)
+				 {
+				 contador=contador+1;
+				 decision=i;
+			   
+				 }
+				 
+				}
+				
+				if(contador>0)
+				{
+				//debe ejecutar la seleccion
+				alert("elegido");
+				//alert(decision);
+				
+			//	alert(contador);
+				}
+				else
+				{
+				//mensaje de alerta para que seleccione una opcion
+				alert("No se eligio nada, por favor seleccione una opcion");
+				//alert(contador);
+				}
+				contador=0;
+			    }); 
             });
         </script>
 </head>
@@ -57,20 +131,62 @@
        <td></td>                          
        </tr>
        <tr>
-       <td><p>Seleccione el tipo de Tratamiento:</p><div id='jqxWidget'>
+       <td><p>Seleccione el tipo de Procesamiento:</p><div id='jqxWidget'>
        </div>
        </td>
        <td>
-       
        </td>	
        </tr> 
        <tr>
-       <td><br></br></td>
+      
        </tr>
        <tr>
-           <td><input type="button" value="Aceptar" id='jqxButton' /></td>
+           <td></td>
        </tr>                        
        </table>
+	 <div id='jqxWidgetPanel' style=" font-size: 13px; font-family: Verdana;">
+	<table>
+	<tr>
+		<td><div style='margin-top: 10px;' id='jqxRadioButton'>
+            <span>Redimensionar</span></div></td>
+	    <td> <div style='margin-top: 10px;' id='jqxRadioButton2'>
+            <span>Escala de Grises</span></div></td>
+		<td> <div style='margin-top: 10px;' id='jqxRadioButton3'>
+            <span>Efecto Reflejo</span></div></td>
+		<td><div style='margin-top: 10px;' id='jqxRadioButton4'>
+            <span>Efecto Brillo</span></div></td>
+	</tr>
+	<tr>
+		<td> <div style='margin-top: 10px;' id='jqxRadioButton5'>
+            <span>Invertir Colores</span></div></td>
+	    <td> <div style='margin-top: 10px;' id='jqxRadioButton6'>
+            <span>Traspuesta(90º)</span></div></td>
+		<td> <div style='margin-top: 10px;' id='jqxRadioButton7'>
+            <span>Traspuesta(180º)</span></div></td>
+		<td> <div style='margin-top: 10px;' id='jqxRadioButton8'>
+            <span>Traspuesta(270º)</span></div></td>
+				
+	</tr>
+	<tr>
+		<td> <div style='margin-top: 10px;' id='jqxRadioButton9'>
+            <span>Efecto Negativo</span></div></td>
+	    <td> <div style='margin-top: 10px;' id='jqxRadioButton10'>
+            <span>Efecto Sepia</span></div></td>
+		<td> <div style='margin-top: 10px;' id='jqxRadioButton11'>
+            <span>Efecto RGB</span></div></td>
+		<td> <div style='margin-top: 10px;' id='jqxRadioButton12'>
+            <span>Invertir</span></div></td>
+				
+	</tr>
+	<tr>
+		<td> <div style='margin-top: 10px;' id='jqxRadioButton13'>
+            <span>Convolución</span></div></td>
+	   
+				
+	</tr>
+	</table>
+	</div>
+	<input type="button" value="Aceptar" id='jqxButton' />
    <div class="date">
     <div class="left">Miércoles, Nov 27/2013 &nbsp;&nbsp;|</div>
     
@@ -85,13 +201,14 @@
  </div>
  <div id="rightPanel">
   <h2>Fotos Generadas</h2>
-  <div class="pic1"></div>
-  <a href="#" class="view">view large</a>
-   <div class="pic2"></div>
-  <a href="#" class="view">view large</a>
-   <div class="pic3"></div>
-  <a href="#" class="view">view large</a>
-
+ <!-- <div class="pic1"></div>-->
+  <a href="imagenes_generadas/cr7.jpg" class="lightbox" rel="flowers" title="Tiempo de ejecución:x , formato: x"><img src="imagenes_generadas/cr7.jpg" width="100" height="40" alt="" /></a>
+ <!--  <div class="pic2"></div>-->
+  <a href="imagenes_generadas/messi.jpg" class="lightbox" rel="flowers" title="Tiempo de ejecución:x , formato: x"><img src="imagenes_generadas/messi.jpg" width="100" height="40" alt="" /></a>
+ <!--   <div class="pic3"></div>-->
+  <a href="imagenes_generadas/colores.jpg" class="lightbox" rel="flowers" title="Tiempo de ejecución:x , formato: x"><img src="imagenes_generadas/colores.jpg" width="100" height="40" alt="" /></a>
+ <a href="imagenes_generadas/campo.jpg" class="lightbox" rel="flowers" title="Tiempo de ejecución:x , formato: x"><img src="imagenes_generadas/campo.jpg" width="100" height="40" alt="" /></a>
+  <a href="imagenes_generadas/avion.jpg" class="lightbox" rel="flowers" title="Tiempo de ejecución:x , formato: x"><img src="imagenes_generadas/avion.jpg" width="100" height="40" alt="" /></a>
  </div>
  <div id="footPanel">
   <div class="nav">
