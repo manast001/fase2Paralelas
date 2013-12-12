@@ -10,12 +10,14 @@
 <link rel="stylesheet" href="jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
     <script type="text/javascript" src="jqwidgets/scripts/gettheme.js"></script>
     <script type="text/javascript" src="jqwidgets/scripts/jquery-1.10.2.min.js"></script>
+ 
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxscrollbar.js"></script>
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxlistbox.js"></script>
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxwindow.js"></script>
 	 <script type="text/javascript" src="jqwidgets/jqwidgets/jqxpanel.js"></script>
 	 <script type="text/javascript" src="jqwidgets/jqwidgets/jqxcheckbox.js"></script>
 	 <script type="text/javascript" src="jqwidgets/jqwidgets/jqxradiobutton.js"></script>
@@ -51,10 +53,26 @@
 				$("#jqxRadioButton11").jqxRadioButton({ width: 140, height: 25, theme: theme });
 				$("#jqxRadioButton12").jqxRadioButton({ width: 140, height: 25, theme: theme });
 				$("#jqxRadioButton13").jqxRadioButton({ width: 140, height: 25, theme: theme });
-			    $(".lightbox").lightbox();
+                                $(".lightbox").lightbox();
 				
+                                $('#customWindow').jqxWindow({position: { x: 500, y: 500 },autoOpen: false, theme: theme, width: 350,
+                    height: 200, resizable: false,
+                    cancelButton: $('#cancelButton'),
+                    initContent: function () {
+                        $("#jqxWidgetPanel1").jqxPanel({ width: 333, height: 155, theme: theme });
+                        $("#inputAncho").jqxInput({placeHolder: "Ingrese el Ancho", height: 25, width: 200,theme: theme });
+                                $("#inputLargo").jqxInput({placeHolder: "Ingrese el Largo", height: 25, width: 200,theme: theme });
+                        $('#aceptarButton').jqxButton({ theme: theme, width: '100px', disabled: false });
+                        $('#cancelButton').jqxButton({ theme: theme, width: '100px', disabled: false });
+                       
+                    }
+                });
+       
+                                 
+                                
 				$("#jqxButton").on('click', function () {
 				//capturo valores de los inputs
+                                comprobarFile();
 				var valor_dropdown = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
 				var radio_buttoms= new Array();
 				radio_buttoms[0] = $("#jqxRadioButton").val();
@@ -85,12 +103,59 @@
 				 }
 				 
 				}
-				
-				if(contador>0)
+				switch(decision)
+                                {
+                                case 0:
+                                   alert("Redimensionar");
+                                   $('#customWindow').jqxWindow('open');
+                                  break;
+                                case 1:
+                                  alert("Escala de Grises");
+                                  break;
+                                case 2:
+                                  alert("Efecto Reflejo");
+                                  break;
+                                case 3:
+                                  alert("Efecto Brillo");
+                                  break;
+                                case 4:
+                                  alert("Invertir Colores");
+                                  break;
+                                case 5:
+                                  alert("Traspuesta(90°)");
+                                  break;
+                                case 6:
+                                   alert("Traspuesta(180°)");
+                                  break;
+                                case 7:
+                                   alert("Traspuesta(270°)");
+                                  break;
+                                case 8:
+                                   alert("Efecto Negativo");
+                                  break;
+                                case 9:
+                                   alert("Efecto Sepia");
+                                  break;
+                                case 10:
+                                   alert("Efecto RGB");
+                                  break;
+                                case 11:
+                                   alert("Invertir ");
+                                  break;
+                                case 12:
+                                   alert("Convolucion");
+                                  break;
+                                default:
+                                 alert("No se eligio nada");
+                                }
+			/*	if(contador>0)
 				{
 				//debe ejecutar la seleccion
-				alert("subiendo");
-                                subirArchivos();
+                                if(decision==0)
+                                {
+                                 $('#customWindow').jqxWindow('open');
+                                }
+                              //  subirArchivos();
 				//alert(decision);
 				
 			//	alert(contador);
@@ -101,7 +166,7 @@
 				alert("No se eligio nada, por favor seleccione una opcion");
 				//alert(contador);
 				}
-				contador=0;
+				contador=0;*/
 			    }); 
                             
             function subirArchivos() {
@@ -119,6 +184,16 @@
              });
              }
             });
+            
+function comprobarFile(){
+		if(archivo.value==""){
+                    
+			//alert("Esta vacio");
+		}
+                else
+                    
+                 //alert("Usted a elegido un archivo");
+	}
         </script>
 </head>
 
@@ -248,5 +323,49 @@
  </div>
 </div>
 </div>
+  
+    
+     <div id="customWindow">
+                <div id="customWindowHeader">
+                    <span id="captureContainer" style="float: left">Redimensionar</span>
+                </div>
+                <div id="customWindowConjqxWidgetPanel1tent" style="overflow: auto">
+                    <div id="jqxWidgetPanel1">
+                    <div style="text-align: center;">
+                        Ingrese las nuevas dimensiones para la imagen
+                        <table style="margin: 0 auto;">
+                        <tr>
+                        <td>    
+                        <p>Ancho:</p>
+                        </td>
+                        <td>
+                        <input type="text" id="inputAncho"/>  
+                        </td>
+                         <td>
+                        <p> (px)</p>    
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>    
+                        <p>Largo:</p>
+                        </td>
+                        <td>
+                        <input type="text" id="inputLargo"/>  
+                        </td>
+                        <td>
+                        <p> (px)</p>    
+                        </td>
+                        </tr>
+                         </table>    
+                        <div style="float: center">
+                            <input type="button" value="Aceptar" id="aceptarButton" />
+                            <input type="button" value="Cancelar" id="cancelButton" />
+                        </div>
+                       
+                      
+                        </div>
+                </div>
+            </div>
+  </div>
 </body>
 </html>
