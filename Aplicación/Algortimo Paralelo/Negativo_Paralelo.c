@@ -4,6 +4,16 @@
 */
 
 
+//**********************************************
+// Compilación
+// $ mpicc `Wand-config --cflags --cppflags` Negativo_Paralelo.c -o Negativo_Paralelo `Wand-config --ldflags --libs`
+// Ejecutar
+// $ mpirun -np X ./Negativo_Paralelo imagen.bmp imagen_salida.bmp
+// X es el numero de procesadores.
+//**********************************************
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -85,6 +95,7 @@ int main(int argc, char **argv) {
     MPI_Type_create_struct(6, blockcounts, offsets, oldtypes, &PIXEL_TYPE);
     MPI_Type_commit(&PIXEL_TYPE);
 
+
     /* Medición del tiempo inicial */
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
@@ -93,8 +104,6 @@ int main(int argc, char **argv) {
     inicio = (alto/numero_procesos)*identificador_nodo; // defino la fila de inicio que procesará el nodo
     fin = (alto/numero_procesos)*(identificador_nodo+1); // defino el fin del ciclo que recorre las filas de la matriz
 
-    double verde, rojo, azul; //Los valores estan en proporciones en als escalas dentro de la imagen
-
     for(i = inicio; i < fin; i++) {//FILA
 
         PixelSetIteratorRow(iterator,(ssize_t)i-1);
@@ -102,28 +111,18 @@ int main(int argc, char **argv) {
         if (pixels == (PixelWand **) NULL) break;
 
         for(j = 0; j < ancho; j++) {//COLUMNA
-                
                 PixelGetMagickColor(pixels[j],&pixel);
+                
+                //*****************EFECTO NEGATIVO***************************
+                
+                pixel.red   = 255 - pixel.red;
+                pixel.green = 255 - pixel.green; 
+                pixel.blue  = 255 - pixel.blue;   
 
-                verde   = PixelGetGreen(pixels[j]); //Recuperamos el valor del eemento en el pixel
-                rojo    = PixelGetRed(pixels[j]);
-                azul    = PixelGetBlue(pixels[j]);
-
-                /* Los componentes de los elementos dentro del pixel estan en porcentajes(%) en la escala del pixel (0.000 - 1.000)  */
+                //*********************************************************
             
-                PixelSetGreen(pixels[j], 1-verde);  //Negativo es el complemento.... por lo que esta en porcentaje es 1-color.
-                PixelSetRed(pixels[j], 1-rojo);
-                PixelSetBlue(pixels[j], 1-azul);
-                
-                /*
-                pixel.red 	= 	1-pixel.red;
-            	pixel.green = 	1-pixel.green;
-            	pixel.blue 	= 	1-pixel.blue;
-                */
-            /*
             if(identificador_nodo != 0){
-                
-                //linea_pixeles[j] = pixel;
+
                 linea_pixeles[j].red = pixel.red;
                 linea_pixeles[j].blue = pixel.blue;
                 linea_pixeles[j].green = pixel.green;
@@ -132,13 +131,9 @@ int main(int argc, char **argv) {
                 linea_pixeles[j].fuzz = pixel.fuzz;
 
            }else{
-                
                 PixelSetMagickColor(pixels[j],&pixel);
             }
-            */
         }
-
-
         (void) PixelSyncIterator(iterator);
 
         if(identificador_nodo != 0) {
