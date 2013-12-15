@@ -18,10 +18,10 @@
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxinput.js"></script>
     <script type="text/javascript" src="jqwidgets/jqwidgets/jqxwindow.js"></script>
-	 <script type="text/javascript" src="jqwidgets/jqwidgets/jqxpanel.js"></script>
-	 <script type="text/javascript" src="jqwidgets/jqwidgets/jqxcheckbox.js"></script>
-	 <script type="text/javascript" src="jqwidgets/jqwidgets/jqxradiobutton.js"></script>
-	 
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxslider.js"></script>
 	 <link rel="stylesheet" href="css/lightbox.css" type="text/css" media="screen" />
 	
 	 <script type="text/javascript" src="js/upload.js"></script>
@@ -32,25 +32,40 @@
                 
                 $('#popupAviso').jqxWindow({position: { x: 500, y: 500 }, width: 350,height: 200,theme: theme, resizable: false, autoOpen: false, isModal: true, modalOpacity: 0.01});
     /* CREO EL PANEL PARA EL CONTENIDO DEL AVISO */
-$("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });     
+$("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });   
+
+$('#popupAviso1').jqxWindow({position: { x: 500, y: 500 }, width: 350,height: 200,theme: theme, resizable: false, autoOpen: false, isModal: true, modalOpacity: 0.01});
+    /* CREO EL PANEL PARA EL CONTENIDO DEL AVISO */
+$("#Msje1").jqxPanel({ width: 340, height: 100, theme: theme }); 
+
+$('#popupAviso2').jqxWindow({position: { x: 500, y: 500 }, width: 400,height: 210,theme: theme, resizable: false, autoOpen: false, isModal: true, modalOpacity: 0.01});
+    /* CREO EL PANEL PARA EL CONTENIDO DEL AVISO */
+$("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme }); 
 /*DEFINICION DE CONTENIDO DEL POP UP*/
- var InputsRedimensionar ="<!--Caso Cierre Proceso !--><div><center>Ingrese las nuevas dimensiones<br></center></div><center><Table><tr><td>Ancho:</td><td><input type='text' id='inputAncho'style='margin-right:20px;'/></td></tr><tr><td>Largo:</td><td><input type='text' id='inputLargo'  style='margin-right:10px;'/></td></tr></table></center><!--Caso Cierre Proceso !-->";
+ var casoaviso = "<!--Caso Aviso !--><input type='button' value='Aceptar' id='aceptar1'style='margin-right:20px;' /><!--Caso Aviso !-->";
+
+ var InputsRedimensionar ="<!--Caso Cierre Proceso !--><div><center>Seleccione el parametro para ejecutar la redimensión<br></center></div><center><Table><tr><td>Porcentaje:</td><td><div id='Redimension'style='margin-right:20px;'/></div></td></tr></table></center><!--Caso Cierre Proceso !-->";
  
+ var InputsRGB="<!--Caso Cierre Proceso !--><div><center>Seleccione la técnica RGB a ejecutar<br></center></div><center><Table><tr><td>Técnica:</td><td><div id='RGBdrop'style='margin-right:20px;'/></div></td></tr></table></center><!--Caso Cierre Proceso !-->";
+ var InputsBrillo="<!--Caso Cierre Proceso !--><div><center>Seleccione el nivel de Brillo<br></center></div><center><Table><tr><td>Nivel:</td><td><div id='priceSlider'style='margin-right:20px;'/></div></td></tr></table></center><div id='events'></div><!--Caso Cierre Proceso !-->";
  var casoavisoRedimensionar= "<!--Caso Aviso !--><div><center><input type='button' value='Aceptar' id='aceptar'style='margin-right:20px;'/><input type='button' value='Cancelar' id='cancelar'style='margin-right:10px;'/></center></div><!--Caso Aviso !-->";
+ var casoavisoRGB= "<!--Caso Aviso !--><div><center><input type='button' value='Aceptar' id='aceptarRGB'style='margin-right:20px;'/><input type='button' value='Cancelar' id='cancelarRGB'style='margin-right:10px;'/></center></div><!--Caso Aviso !-->";
+ var casoavisoBrillo= "<!--Caso Aviso !--><div><center><input type='button' value='Aceptar' id='aceptarBrillo'style='margin-right:20px;'/><input type='button' value='Cancelar' id='cancelarBrillo'style='margin-right:10px;'/></center></div><!--Caso Aviso !-->";
 
 
 /*CIERRA EL TAB */
   
                 
                 var theme = getDemoTheme();
-                var source = [
-                    "Secuencial",
-                    "Paralelo"
-                    
-		        ];
-				var contador=0;
+                var source = ["Secuencial", "Paralelo" ];
+                var source2 = ["4 Procesos Local","18 Procesos", "36 Procesos","60 Procesos" ];    
+        	var source3=["-25%","-50%","-75%","100%","200%","300%","400%"];
+                var source4=["RGB:Verde","RGB:Azul","RGB:Rojo"];
+		var contador=0;
                 // Create a jqxDropDownList
                 $("#jqxWidget").jqxDropDownList({ source: source,selectedIndex: 0,width: '200', height: '25', theme: theme });
+                $("#Procesos").jqxDropDownList({ source: source2,selectedIndex: 0,width: '200', height: '25', theme: theme });
+               // $("#Redimension").jqxDropDownList({ source: source3,selectedIndex: 3,width: '200', height: '25', theme: theme });
                 $("#jqxButton").jqxButton({ width: '150', theme: theme });
                 $("#jqxWidgetPanel").jqxPanel({ width: 600, height: 160, theme: theme });
 				$("#jqxRadioButton").jqxRadioButton({ width: 140, height: 25, theme: theme });
@@ -80,11 +95,38 @@ $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });
                        
                     }
                 });
+                
+                function displayEvent(event) {
+                alert(event.args.value);
+                var eventData = event.type;
+                alert(eventData);
+                var eventData2="Valor";
+                eventData2 += ': ' + event.args.value;
+                $('#events').jqxPanel('clearContent');
+                $('#events').jqxPanel('prepend', '<div class="item" style="margin-top: 5px;">' + eventData2 + '</div>');
+                }
+                
+                
        
                                  
                                 
 				$("#jqxButton").on('click', function () {
 				//capturo valores de los inputs
+                              
+                                if(archivo.value==""){
+                    
+                                $('#Msje').empty();
+                                $("#Msje").append("Debe seleccionar una Imagen a tratar.");
+                                $('#Titulo').empty();
+                                $("#Titulo").append("Aviso");
+                                $('#Botones').empty();
+                                $("#Botones").append(casoaviso);
+                                $("#popupAviso").jqxWindow('show');
+                                $("#aceptar1").jqxButton({ width: '100px', theme:theme });
+                                $('#aceptar1').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
+                                  }
+                                else
+                                {
                                // comprobarFile();
 				var valor_dropdown = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
 				var radio_buttoms= new Array();
@@ -119,7 +161,7 @@ $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });
 				switch(decision)
                                 {
                                 case 0:
-                                   alert("Redimensionar");
+                                //   alert("Redimensionar");
                                     $('#Msje').empty();
                                     $("#Msje").append(InputsRedimensionar);
                                     $('#Titulo').empty();
@@ -127,13 +169,41 @@ $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });
                                     $('#Botones').empty();
                                     $("#Botones").append(casoavisoRedimensionar);
                                     $("#popupAviso").jqxWindow('show');
-                                    $("#inputAncho").jqxInput({placeHolder: "Ingrese el Ancho", height: 25, width: 200,theme: theme });
-                                    $("#inputLargo").jqxInput({placeHolder: "Ingrese el Largo", height: 25, width: 200,theme: theme });
+                                    $("#Redimension").jqxDropDownList({ source: source3,selectedIndex: 3,width: '200', height: '25', theme: theme });
                                     $("#aceptar").jqxButton({ width: '100px', theme:theme });
                                     $("#cancelar").jqxButton({ width: '100px', theme:theme });
                                   
                                    
-                                    $('#aceptar').on('click', function () {alert("Aceptaste Redimensionamiento"); }); 
+                                    $('#aceptar').on('click', function () {
+                                    var valorProc; 
+                                    var valorProcLabel;
+                                    var valorProcIndex;
+                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
+                                    var valorRed = $("#Redimension").jqxDropDownList('getSelectedItem'); 
+                                    var valorRedLabel=valorRed.label;
+                                    var valorRedIndex=valorRed.index;
+                                   // alert(valorTipoProc.label);
+                                   // alert(valorTipoProc.index);
+                                    if(valorTipoProc.label=="Paralelo")
+                                    {
+                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
+                                    valorProcLabel=valorProc.label;
+                                    valorProcIndex=valorProc.index;
+                                   // alert(valorProcLabel);
+                                   // alert(valorProcIndex);
+                                    }
+                                    else
+                                    {
+                                    valorProcLabel="";
+                                    valorProcIndex=-1;
+                                   // alert(valorProcLabel);
+                                   // alert(valorProcIndex);
+                                    }
+                                  //  alert(valorRed.label); label 
+                                 //   alert(valorRed.index); opcion
+                                    
+                             
+                                    }); 
                                     $('#cancelar').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
                                  //  $('#customWindow').jqxWindow('open');
                                   break;
@@ -145,7 +215,27 @@ $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });
                                   break;
                                 case 3:
                                   alert("Efecto Brillo");
-                                  break;
+                                    $('#Msje2').empty();
+                                    $("#Msje2").append(InputsBrillo);
+                                    $('#Titulo2').empty();
+                                    $("#Titulo2").append("Efecto Brillo");
+                                    $('#Botones2').empty();
+                                    $("#Botones2").append(casoavisoBrillo);
+                                    $("#popupAviso2").jqxWindow('show');              
+                                    $("#aceptarBrillo").jqxButton({ width: '100px', theme:theme });
+                                    $("#cancelarBrillo").jqxButton({ width: '100px', theme:theme });
+                                   var priceslider = $('#priceSlider');
+                                   priceslider.jqxSlider({theme: theme, mode: 'fixed',min: -127, max: 127,showTicks: false });
+                                   $('#events').jqxPanel({ theme: theme, height: '25px', width: '130px' });
+                                   //priceslider.jqxSlider({ showButtons: true, theme: theme, height: 30, min: -127, max: 127, step: 1, ticksFrequency: 350, mode: 'fixed', values: [500, 4000], rangeSlider: true,width: 180 });
+                                 // priceslider.jqxSlider({ min: -127, max: 127, ticksFrequency: 25.5, value: 0, step: 1, theme: theme,showTicks: true,showRange: true });
+                                 //  $('#redLevel').jqxSlider({ min: -127, max: 127, ticksFrequency: 25.5, value: 0, step: 1, theme: theme });
+                                   $('#cancelarBrillo').on('click', function () {$("#popupAviso2").jqxWindow('close');  }); 
+                                  $('#priceSlider').on('change', function (event) {
+                                 
+                displayEvent(event);
+                });
+                                    break;
                                 case 4:
                                   alert("Invertir Colores");
                                   break;
@@ -166,6 +256,52 @@ $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });
                                   break;
                                 case 10:
                                    alert("Efecto RGB");
+                                    $('#Msje').empty();
+                                    $("#Msje").append(InputsRGB);
+                                    $('#Titulo').empty();
+                                    $("#Titulo").append("Técnica RGB");
+                                    $('#Botones').empty();
+                                    $("#Botones").append(casoavisoRGB);
+                                    $("#popupAviso").jqxWindow('show');
+                                    $("#RGBdrop").jqxDropDownList({ source: source4,selectedIndex: 0,width: '200', height: '25', theme: theme });
+                                    $("#aceptarRGB").jqxButton({ width: '100px', theme:theme });
+                                    $("#cancelarRGB").jqxButton({ width: '100px', theme:theme });
+                                  
+                                  
+                                    $('#aceptarRGB').on('click', function () {
+                                      
+                                    var valorProc; 
+                                    var valorProcLabel;
+                                    var valorProcIndex;
+                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
+                                    var valorRGB= $("#RGBdrop").jqxDropDownList('getSelectedItem'); 
+                                    var valorRGBLabel=valorRGB.label;
+                                    var valorRGBIndex=valorRGB.index;
+                                    alert(valorTipoProc.label);
+                                    alert(valorRGBLabel);
+                                   // alert(valorTipoProc.index);
+                                    if(valorTipoProc.label=="Paralelo")
+                                    {
+                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
+                                    valorProcLabel=valorProc.label;
+                                    valorProcIndex=valorProc.index;
+                                    alert(valorProcLabel);
+                                   // alert(valorProcIndex);
+                                    }
+                                    else
+                                    {
+                                    valorProcLabel="";
+                                    valorProcIndex=-1;
+                                    alert(valorProcLabel);
+                                   // alert(valorProcIndex);
+                                    }
+                                  //  alert(valorRed.label); label 
+                                 //   alert(valorRed.index); opcion
+                                    
+                             
+                                    }); 
+                                    $('#cancelarRGB').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
+                                   
                                   break;
                                 case 11:
                                    alert("Invertir ");
@@ -174,8 +310,9 @@ $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });
                                    alert("Convolucion");
                                   break;
                                 default:
-                                 alert("No se eligio nada");
-                                }
+                                 comprobarTecnica();
+                                };
+                            
 			/*	if(contador>0)
 				{
 				//debe ejecutar la seleccion
@@ -194,7 +331,7 @@ $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });
 				alert("No se eligio nada, por favor seleccione una opcion");
 				//alert(contador);
 				}
-				contador=0;*/
+				contador=0;*/}
 			    }); 
                             
             function subirArchivos() {
@@ -212,21 +349,86 @@ $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });
              });
              }
              
+             function ocultar_mostrar(div){
+            owurl7 = document.getElementById(div);
+            if(owurl7.style.display=='')
+            {  
+             owurl7.style.display='none';
+            }
+            }
              
-
+            $("#jqxWidget").on('select', function (event)
+            {
+           
+            var args = event.args;
+            if (args) {
+            // index represents the item's index.                
+            var index = args.index;
+            var item = args.item;
+            
+            // get item's label and value.
+            var label = item.label;
+            var value = item.value;
+                    if(label=="Paralelo"){
+                    var element=document.getElementById("PROCESOS");
+                        if(element.style.display=='none')
+                        {                     
+                            element.style.display='';
+                        }
+                    }
+                    else{
+                     var element=document.getElementById("PROCESOS");
+                        if(element.style.display=='')
+                        {                     
+                            element.style.display='none';
+                        }    
+                    }
+                     
+            }                        
+            }); 
+            
+            function comprobarFile(){
+		if(archivo.value==""){
+                    
+			$('#Msje').empty();
+                        $("#Msje").append("Debe seleccionar una Imagen a tratar.");
+                        $('#Titulo').empty();
+                        $("#Titulo").append("Aviso");
+                        $('#Botones').empty();
+                        $("#Botones").append(casoaviso);
+                        $("#popupAviso").jqxWindow('show');
+                        $("#aceptar1").jqxButton({ width: '100px', theme:theme });
+                        $('#aceptar1').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
+		}
+                
+                    
+               
+	}
+        
+         function comprobarTecnica(){
+		
+                    
+			$('#Msje').empty();
+                        $("#Msje").append("Debe seleccionar una Técnica a Implementar");
+                        $('#Titulo').empty();
+                        $("#Titulo").append("Aviso");
+                        $('#Botones').empty();
+                        $("#Botones").append(casoaviso);
+                        $("#popupAviso").jqxWindow('show');
+                        $("#aceptar1").jqxButton({ width: '100px', theme:theme });
+                        $('#aceptar1').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
+		
+                
+                    
+               
+	}
    
             });
             
-/*function comprobarFile(){
-		if(archivo.value==""){
-                    
-			alert("Esta vacio");
-		}
-                else
-                    
-               alert("Usted a elegido un archivo");
-	}*/
+
                                                             
+
+
 
         </script>
 </head>
@@ -257,13 +459,14 @@ $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });
        </tr>
        <tr>
        <td><p>Seleccione el tipo de Procesamiento:</p><div id='jqxWidget'>
-       </div>
+       </div
        </td>
-       <td>
+       <td>   
        </td>	
        </tr> 
-       <tr>
-      
+       <tr id="PROCESOS"style="display:none;">
+       <td><p>N° Procesos:</p><div id='Procesos'>
+       </div></td>
        </tr>
        <tr>
            <td></td>
@@ -407,6 +610,22 @@ $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });
     <div id='ContenidoAviso'>
         <div id='Msje' ></div>
         <div id='Botones' style="margin-top:10px; margin-right: 20px;"> </div>
+    </div>
+</div>   
+    
+     <div id='popupAviso1'>
+    <div id='Titulo1'></div>
+    <div id='ContenidoAviso1'>
+        <div id='Msje1' ></div>
+        <div id='Botones1' style="margin-top:10px; margin-right: 20px;"> </div>
+    </div>
+</div>   
+    
+     <div id='popupAviso2'>
+    <div id='Titulo2'></div>
+    <div id='ContenidoAviso2'>
+        <div id='Msje2' ></div>
+        <div id='Botones2' style="margin-top:10px; margin-right: 20px;"> </div>
     </div>
 </div>   
 </body>
