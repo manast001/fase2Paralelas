@@ -41,7 +41,7 @@ $("#Msje1").jqxPanel({ width: 340, height: 100, theme: theme });
 $('#popupAviso2').jqxWindow({position: { x: 500, y: 500 }, width: 400,height: 210,theme: theme, resizable: false, autoOpen: false, isModal: true, modalOpacity: 0.01});
     /* CREO EL PANEL PARA EL CONTENIDO DEL AVISO */
 $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme }); 
-/*DEFINICION DE CONTENIDO DEL POP UP*/
+
  var casoaviso = "<!--Caso Aviso !--><input type='button' value='Aceptar' id='aceptar1'style='margin-right:20px;' /><!--Caso Aviso !-->";
 
  var InputsRedimensionar ="<!--Caso Cierre Proceso !--><div><center>Seleccione el parametro para ejecutar la redimensión<br></center></div><center><Table><tr><td>Porcentaje:</td><td><div id='Redimension'style='margin-right:20px;'/></div></td></tr></table></center><!--Caso Cierre Proceso !-->";
@@ -202,6 +202,30 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                   //  alert(valorRed.label); label 
                                  //   alert(valorRed.index); opcion
                                     
+                            
+                                    var datos={"id_proces":valorTipoProc.value,"id_red":valorRedIndex,"id_procIndex":valorProcIndex}; 
+                                    //subirArchivos(); 
+                                   $.ajax({  url: "recibo_datos.php",
+                            data: datos,
+                            type: "post",
+                            success: function(json) 
+			     {
+                              alert("datos recibidos");  
+                             },
+                             error:function (xhr, ajaxOptions, thrownError) {
+                                 $('#Msje').empty();
+                                 $("#Msje").append(xhr.responseText);
+                                 $('#Titulo').empty();
+                                 $("#Titulo").append("Aviso");
+                                 $('#Botones').empty();
+                                 $("#Botones").append(casoaviso);
+                                 $("#popupAviso").jqxWindow('show');
+                                 $("#aceptar1").jqxButton({ width: '100px', theme:theme }); 
+                               
+                             }
+                        });
+                            // var miJSON = JSON.encode(datos_ajax);
+                            
                              
                                     }); 
                                     $('#cancelar').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
