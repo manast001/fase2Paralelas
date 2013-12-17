@@ -13,6 +13,7 @@
 #include <math.h>
 #include <wand/MagickWand.h>
 #include <string.h>
+#include <time.h>
 
 
 void imagen_invertida(MagickWand *imagen,MagickWand *invertida){
@@ -83,7 +84,8 @@ int main(int argc,char **argv)
 {
         if(argc!=2)
         {
-                
+          double start, end;//--codigo nuevo
+          start = clock(); // tiempo de inicio--codigo nuevo
         //creamos las imagenes
                 MagickWand *imagen=NewMagickWand();
                 MagickWand *invertida=NewMagickWand();
@@ -102,6 +104,8 @@ int main(int argc,char **argv)
         
         //terminamos ejecucion de la libreria
                 MagickWandTerminus();
+         end = clock(); // tiempo de tÃ©rmino--codigo nuevo
+         printf("Tiempo %f s\n", (end - start) / CLOCKS_PER_SEC);--codigo nuevo
         }
         return 0;
 }
