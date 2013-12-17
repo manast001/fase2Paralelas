@@ -61,26 +61,29 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                 var source2 = ["4 Procesos Local","18 Procesos", "36 Procesos","60 Procesos" ];    
         	var source3=["-25%","-50%","-75%","100%","200%","300%","400%"];
                 var source4=["RGB:Verde","RGB:Azul","RGB:Rojo"];
+                var source5=["Filtros","Animación"];
 		var contador=0;
                 // Create a jqxDropDownList
                 $("#jqxWidget").jqxDropDownList({ source: source,selectedIndex: 0,width: '200', height: '25', theme: theme });
                 $("#Procesos").jqxDropDownList({ source: source2,selectedIndex: 0,width: '200', height: '25', theme: theme });
+                $("#TratImagen").jqxDropDownList({ source: source5,selectedIndex: 0,width: '200', height: '25', theme: theme });
                // $("#Redimension").jqxDropDownList({ source: source3,selectedIndex: 3,width: '200', height: '25', theme: theme });
                 $("#jqxButton").jqxButton({ width: '150', theme: theme });
                 $("#jqxWidgetPanel").jqxPanel({ width: 600, height: 160, theme: theme });
-				$("#jqxRadioButton").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton2").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton3").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton4").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton5").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton6").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton7").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton8").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton9").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton10").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton11").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton12").jqxRadioButton({ width: 140, height: 25, theme: theme });
-				$("#jqxRadioButton13").jqxRadioButton({ width: 140, height: 25, theme: theme });
+				$("#jqxRadioButton").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false});
+				$("#jqxRadioButton2").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton3").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton4").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton5").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton6").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton7").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton8").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton9").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton10").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton11").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton12").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+				$("#jqxRadioButton13").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
+                                $("#jqxRadioButton14").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:true });
                                 $("a.lightbox").lightbox();
 				
                                 $('#customWindow').jqxWindow({position: { x: 500, y: 500 },autoOpen: false, theme: theme, width: 350,
@@ -129,6 +132,7 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                   }
                                 else
                                 {
+                                
                                // comprobarFile();
 				var valor_dropdown = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
 				var radio_buttoms= new Array();
@@ -145,12 +149,13 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
 				radio_buttoms[10] =$("#jqxRadioButton11").val();
 				radio_buttoms[11] =$("#jqxRadioButton12").val();
 				radio_buttoms[12] =$("#jqxRadioButton13").val();
+                                radio_buttoms[13] =$("#jqxRadioButton14").val();
 				//alert(valor_dropdown.index);
 				//alert(valor_dropdown.label);
 				
 				var decision;
 				
-				for(var i=0;i<=12;i++)
+				for(var i=0;i<=13;i++)
 				{
 				 if(radio_buttoms[i]==true)
 				 {
@@ -523,6 +528,28 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     
                                    //alert("Convolucion");
                                   break;
+                                case 13:
+                                    var valorProc; 
+                                    var valorProcLabel;
+                                    var valorProcIndex;
+                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
+                                 
+                                    if(valorTipoProc.label=="Paralelo")
+                                    {
+                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
+                                    valorProcLabel=valorProc.label;
+                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
+                                   
+                                    }
+                                    else
+                                    {
+                                    valorProcLabel="";
+                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
+                                    }
+                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
+                                    
+                                 //  alert("Superposición de imagenes");
+                                  break;
                                 default:
                                  comprobarTecnica();
                                 };
@@ -636,6 +663,54 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
             }                        
             }); 
             
+             $("#TratImagen").on('select', function (event)
+            {
+           
+            var args = event.args;
+            if (args) {
+            // index represents the item's index.                
+            var index = args.index;
+            var item = args.item;
+            
+            // get item's label and value.
+            var label = item.label;
+            var value = item.value;
+                    if(label=="Filtros"){
+                    $("#jqxRadioButton").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton2").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton3").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton4").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton5").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton6").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton7").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton8").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton9").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton10").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton11").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton12").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton13").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton14").jqxRadioButton({disabled:true});
+                    }
+                    else{
+                    $("#jqxRadioButton").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton2").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton3").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton4").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton5").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton6").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton7").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton8").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton9").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton10").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton11").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton12").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton13").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton14").jqxRadioButton({disabled:false});
+                    }
+                     
+            }                        
+            }); 
+            
             function comprobarFile(){
 		if(archivo.value==""){
                     
@@ -653,6 +728,8 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                     
                
 	}
+        
+      
         
          function comprobarTecnica(){
 		
@@ -706,9 +783,14 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
        <td><p>Seleccione la imagen a tratar:</p><input type="file" name="archivo" id="archivo"/></td>    
        <td></td>                          
        </tr>
+       <tr> 
+       <td><p>Seleccione Tratamiento:</p><div id='TratImagen'>
+           </div>
+       </td>
+        </tr>
        <tr>
        <td><p>Seleccione el tipo de Procesamiento:</p><div id='jqxWidget'>
-       </div
+           </div>
        </td>
        <td>   
        </td>	
@@ -758,7 +840,8 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
 	<tr>
 		<td> <div style='margin-top: 10px;' id='jqxRadioButton13'>
             <span>Convolución</span></div></td>
-	   
+	    <td> <div style='margin-top: 10px;' id='jqxRadioButton14'>
+            <span>Superposición de Imágenes</span></div></td>
 				
 	</tr>
 	</table>
