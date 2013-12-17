@@ -105,7 +105,7 @@ int main(int argc,char **argv)
         //terminamos ejecucion de la libreria
                 MagickWandTerminus();
          end = clock(); // tiempo de tÃ©rmino--codigo nuevo
-         printf("Tiempo %f s\n", (end - start) / CLOCKS_PER_SEC);--codigo nuevo
+         printf("Tiempo %f s\n", (end - start) / CLOCKS_PER_SEC);//--codigo nuevo
         }
         return 0;
 }
