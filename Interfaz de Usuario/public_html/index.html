@@ -81,7 +81,7 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
 				$("#jqxRadioButton11").jqxRadioButton({ width: 140, height: 25, theme: theme });
 				$("#jqxRadioButton12").jqxRadioButton({ width: 140, height: 25, theme: theme });
 				$("#jqxRadioButton13").jqxRadioButton({ width: 140, height: 25, theme: theme });
-                                $(".lightbox").lightbox();
+                                $("a.lightbox").lightbox();
 				
                                 $('#customWindow').jqxWindow({position: { x: 500, y: 500 },autoOpen: false, theme: theme, width: 350,
                     height: 200, resizable: false,
@@ -200,7 +200,7 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                   //aqui se debe subir la imagen en conjunto de los parametros
                                   //
                                    
-                                   // subirArchivos();
+                                    //&subirArchivos();
                                     
                                
                             // var miJSON = JSON.encode(datos_ajax);
@@ -529,12 +529,56 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                             
                             }
 			    }); 
+            function ahrefdiv() {
+               
+               var a = document.createElement("a"); 
+               
+               // agregamos propiedades al elemento
+               a.href = "imagenes_generadas/1.jpg"; 
+               a.className="lightbox";
+               $('<a/>').addClass("a.lightbox");
+               $('<a class="a.lightbox"/>');
+               a.rel="flowers";
+               a.title="Tiempo de ejecución:x, formato:x";
+               
+               var img = document.createElement("img");
+               img.setAttribute("src","imagenes_generadas/1.jpg");
+               img.setAttribute("width","100");
+               img.setAttribute("height","40");
+               img.setAttribute("alt","");
+               
+               a.appendChild(img);
+               
+               //imagen.onclick = function(){
+              //alert('el id de este elemento es: ' + this.id);
+             // };
+               // definimos el elemento donde insertamos la imagen
+               var div = document.getElementById("rightPanel"); 
+               // agregamos la imagen
+               div.appendChild(a); 
+           }
+            function imagendiv() {
+               var imagen = document.createElement("img"); 
+               // agregamos propiedades al elemento
+               imagen.src = "imagenes_generadas/1.jpg"; 
+               imagen.width="100";
+               imagen.height="40";
+             //  imagen.onclick = function(){
+             // alert('el id de este elemento es: ' + this.id);
+             // };
+               // definimos el elemento donde insertamos la imagen
+               var div = document.getElementById("rightPanel"); 
+               // agregamos la imagen
+               div.appendChild(imagen); 
+           }
                             
             function subirArchivos() {
              $("#archivo").upload('subir_archivo.php', function(respuesta) {
       //Subida finalizada.
              $("#barra_de_progreso").val(0);
              if (respuesta === 1) {
+                 ahrefdiv();
+               // imagendiv();
             // alert('El archivo ha sido subido correctamente.');
              } else {
                 $('#Msje').empty();
