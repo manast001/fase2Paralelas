@@ -1,3 +1,7 @@
+<?
+
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -58,7 +62,7 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                 
                 var theme = getDemoTheme();
                 var source = ["Secuencial", "Paralelo" ];
-                var source2 = ["4 Procesos Local","18 Procesos", "36 Procesos","60 Procesos" ];    
+                var source2 = ["4 Procesos Local","60 Procesos", "64 Procesos"];    
         	var source3=["-25%","-50%","-75%","100%","200%","300%","400%"];
                 var source4=["RGB:Verde","RGB:Azul","RGB:Rojo"];
                 var source5=["Filtros","Animación"];
@@ -187,7 +191,19 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex para ejecutar en secuencial o paralelo
-                                    
+                                    $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":1},
+                                      async: false,
+                                      type: "post",
+                                         success: function(json) 
+                                        { 
+                              
+                               alert("se han enviado los datos correctamente");
+                                          },
+                                 error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                                }
+                             });
                                 //  alert("Escala de Grises");
                                   break;
                                 case 2:
@@ -209,7 +225,20 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex para ejecutar en secuencial o paralelo
-                                  //alert("Efecto Reflejo");
+                                     $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":2},
+                                      async: false,
+                                      type: "post",
+                                         success: function(json) 
+                                        { 
+                              
+                               alert("se han enviado los datos correctamente");
+                                          },
+                                 error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                                }
+                             });
+//alert("Efecto Reflejo");
                                   break;
                                 
                                 case 4:
@@ -232,7 +261,19 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
                                      //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                  
+                                   $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":4},
+                                      async: false,
+                                      type: "post",
+                                         success: function(json) 
+                                        { 
+                              
+                               alert("se han enviado los datos correctamente");
+                                          },
+                                 error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                                }
+                             });
                                   //alert("Invertir Colores");
                                   break;
                                 case 5:
@@ -255,7 +296,19 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                     
+                                      $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":5},
+                                      async: false,
+                                      type: "post",
+                                         success: function(json) 
+                                        { 
+                              
+                               alert("se han enviado los datos correctamente");
+                                          },
+                                 error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                                }
+                             });
                                   //alert("Traspuesta(90°)");
                                   break;
                                 case 6:
@@ -276,7 +329,19 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcLabel="";
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
-                                   
+                                    $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":6},
+                                      async: false,
+                                      type: "post",
+                                         success: function(json) 
+                                        { 
+                              
+                               alert("se han enviado los datos correctamente");
+                                          },
+                                 error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                                }
+                             });
                                   
                                         //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
                                   // alert("Traspuesta(180°)");
@@ -300,7 +365,20 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                   //alert("Traspuesta(270°)");
+                                     $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":7},
+                                      async: false,
+                                      type: "post",
+                                         success: function(json) 
+                                        { 
+                              
+                               alert("se han enviado los datos correctamente");
+                                          },
+                                 error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                                }
+                             });
+                                    //alert("Traspuesta(270°)");
                                   break;
                                 case 8:
                                    var valorProc; 
@@ -321,7 +399,20 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
                                      //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                   //alert("Efecto Negativo");
+                                      $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":8},
+                                      async: false,
+                                      type: "post",
+                            success: function(json) 
+                            { 
+                              
+                               alert("se han enviado los datos correctamente");
+			    },
+                            error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                            }
+                             });
+  //alert("Efecto Negativo");
                                   break;
                                 case 9:
                                     var valorProc; 
@@ -342,9 +433,22 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                  // alert("Efecto Sepia");
+                                     $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":9},
+                                      async: false,
+                                      type: "post",
+                            success: function(json) 
+                            { 
+                              
+                               alert("se han enviado los datos correctamente");
+			    },
+                            error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                            }
+                              });
+ // alert("Efecto Sepia");
                                   break;
-                                case 10:
+                               
                                   
                                 case 11:
                                     var valorProc; 
@@ -365,7 +469,19 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
                                      //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                    
+                                     $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":11},
+                                      async: false,
+                                      type: "post",
+                            success: function(json) 
+                            { 
+                              
+                               alert("se han enviado los datos correctamente");
+			    },
+                            error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No!"); 
+                            }
+                            });
                                    //alert("Invertir ");
                                   break;
                                 case 12:
@@ -387,7 +503,19 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
                                      //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                    
+                                     $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":12},
+                                      async: false,
+                                      type: "post",
+                            success: function(json) 
+                            { 
+                              
+                               alert("se han enviado los datos correctamente");
+			    },
+                            error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No!"); 
+                            }
+                              });
                                    //alert("Convolucion");
                                   break;
                                 case 13:
@@ -408,6 +536,20 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcLabel="";
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
+                                    
+                                      $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"decision":13},
+                                      async: false,
+                                      type: "post",
+                            success: function(json) 
+                            { 
+                              
+                               alert("se han enviado los datos correctamente");
+			    },
+                            error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No!"); 
+                            }
+          });
                                      //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
                                     
                                  //  alert("Superposición de imagenes");
@@ -587,6 +729,19 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                             // var miJSON = JSON.encode(datos_ajax);
                             
                              $("#popupAviso").jqxWindow('close');
+                              $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"parametro":valorRedIndex,"decision":0},
+                                      async: false,
+                                      type: "post",
+                                         success: function(json) 
+                                        { 
+                              
+                               alert("se han enviado los datos correctamente");
+                                          },
+                                 error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                                }
+                             });
                                     }); 
                                     $('#cancelar').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
                  
@@ -649,7 +804,20 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                     valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
                                     }
                                       //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo, más la variable nivel_brillo que te da el nivel de brillo                            
-                                       $("#popupAviso2").jqxWindow('close');                                     
+                                       $("#popupAviso2").jqxWindow('close');   
+                                        $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"parametro":nivel_brillo,"decision":3},
+                                      async: false,
+                                      type: "post",
+                                         success: function(json) 
+                                        { 
+                              
+                               alert("se han enviado los datos correctamente");
+                                          },
+                                 error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                                }
+                             });
                                     }); 
              }
              else
@@ -702,6 +870,19 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                                   
                                      //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo, más la variable valorRGBIndex que determina la tecnica RGB a implementar
                                      $("#popupAviso").jqxWindow('close');
+                                     $.ajax({  url: 'interior.php',
+                                      data:{"valor":valorProcIndex,"parametro":valorRGBIndex,"decision":10},
+                                      async: false,
+                                      type: "post",
+                                         success: function(json) 
+                                        { 
+                              
+                               alert("se han enviado los datos correctamente");
+                                          },
+                                 error:function (xhr, ajaxOptions, thrownError) {
+                                 alert("No se han cargado los datos correctamente"); 
+                                }
+                             });
                                     }); 
                                     $('#cancelarRGB').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
              }
