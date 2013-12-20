@@ -39,6 +39,9 @@
 $("#Msje").jqxPanel({ width: 340, height: 100, theme: theme });   
 
 $('#popupAviso1').jqxWindow({position: { x: 500, y: 500 }, width: 350,height: 200,theme: theme, resizable: false, autoOpen: false, isModal: true, modalOpacity: 0.01});
+$('#popupAvisoRedimensionar').jqxWindow({position: { x: 500, y: 500 }, width: 350,height: 170,theme: theme, resizable: false, autoOpen: false, isModal: true, modalOpacity: 0.01});
+$('#popupAvisoBrillo').jqxWindow({position: { x: 500, y: 500 }, width: 380,height: 170,theme: theme, resizable: false, autoOpen: false, isModal: true, modalOpacity: 0.01});
+$('#popupAvisoRGB').jqxWindow({position: { x: 500, y: 500 }, width: 350,height: 170,theme: theme, resizable: false, autoOpen: false, isModal: true, modalOpacity: 0.01});
     /* CREO EL PANEL PARA EL CONTENIDO DEL AVISO */
 $("#Msje1").jqxPanel({ width: 340, height: 100, theme: theme }); 
 
@@ -48,11 +51,11 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
 
  var casoaviso = "<!--Caso Aviso !--><input type='button' value='Aceptar' id='aceptar1'style='margin-right:20px;' /><!--Caso Aviso !-->";
 
- var InputsRedimensionar ="<!--Caso Cierre Proceso !--><div><center>Seleccione el parametro para ejecutar la redimensión<br></center></div><center><Table><tr><td>Porcentaje:</td><td><div id='Redimension'style='margin-right:20px;'/></div></td></tr></table></center><!--Caso Cierre Proceso !-->";
+ var InputsRedimensionar ="<!--Caso Cierre Proceso !--><form action='interior.php' method='post'><div><center>Seleccione el parametro para ejecutar la redimensión<br></center></div><center><Table><tr><td>Porcentaje:</td><td><div id='Redimension'style='margin-right:20px;'/></div></td></tr></table></center></form><!--Caso Cierre Proceso !-->";
  
  var InputsRGB="<!--Caso Cierre Proceso !--><div><center>Seleccione la técnica RGB a ejecutar<br></center></div><center><Table><tr><td>Técnica:</td><td><div id='RGBdrop'style='margin-right:20px;'/></div></td></tr></table></center><!--Caso Cierre Proceso !-->";
- var InputsBrillo="<!--Caso Cierre Proceso !--><div><center>Seleccione el nivel de Brillo<br></center></div><center><Table><tr><td>Nivel:</td><td><div id='priceSlider'style='margin-right:20px;'/></div></td></tr></table></center><div id='events'></div><!--Caso Cierre Proceso !-->";
- var casoavisoRedimensionar= "<!--Caso Aviso !--><div><center><input type='button' value='Aceptar' id='aceptar'style='margin-right:20px;'/><input type='button' value='Cancelar' id='cancelar'style='margin-right:10px;'/></center></div><!--Caso Aviso !-->";
+ var InputsBrillo="<!--Caso Cierre Proceso !--><form name='form3'><div><center>Seleccione el nivel de Brillo<br></center></div><center><Table><tr><td>Nivel:</td><td><div id='priceSlider'style='margin-right:20px;'/></div></td></tr></table></center><div id='events'></div></form><!--Caso Cierre Proceso !-->";
+ var casoavisoRedimensionar= "<!--Caso Aviso !--><div><center><input type='submit' value='Aceptar' id='aceptar'style='margin-right:20px;'/><input type='button' value='Cancelar' id='cancelar'style='margin-right:10px;'/></center></div><!--Caso Aviso !-->";
  var casoavisoRGB= "<!--Caso Aviso !--><div><center><input type='button' value='Aceptar' id='aceptarRGB'style='margin-right:20px;'/><input type='button' value='Cancelar' id='cancelarRGB'style='margin-right:10px;'/></center></div><!--Caso Aviso !-->";
  var casoavisoBrillo= "<!--Caso Aviso !--><div><center><input type='button' value='Aceptar' id='aceptarBrillo'style='margin-right:20px;'/><input type='button' value='Cancelar' id='cancelarBrillo'style='margin-right:10px;'/></center></div><!--Caso Aviso !-->";
 
@@ -65,15 +68,33 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                 var source2 = ["4 Procesos Local","60 Procesos", "64 Procesos"];    
         	var source3=["-25%","-50%","-75%","100%","200%","300%","400%"];
                 var source4=["RGB:Verde","RGB:Azul","RGB:Rojo"];
-                var source5=["Filtros","Animación"];
+                var source5=["Técnicas","Animación"];
 		var contador=0;
                 // Create a jqxDropDownList
                 $("#jqxWidget").jqxDropDownList({ source: source,selectedIndex: 0,width: '200', height: '25', theme: theme });
-                $("#Procesos").jqxDropDownList({ source: source2,selectedIndex: 0,width: '200', height: '25', theme: theme });
+                $("#Procesos").jqxDropDownList({ source: source2,selectedIndex: -1,width: '200', height: '25', theme: theme,placeHolder: "Seleccione por favor" });
                 $("#TratImagen").jqxDropDownList({ source: source5,selectedIndex: 0,width: '200', height: '25', theme: theme });
                // $("#Redimension").jqxDropDownList({ source: source3,selectedIndex: 3,width: '200', height: '25', theme: theme });
-                $("#jqxButton").jqxButton({ width: '150', theme: theme });
-                $("#jqxWidgetPanel").jqxPanel({ width: 600, height: 160, theme: theme });
+               $("#Redimension").jqxDropDownList({ source: source3,selectedIndex: 3,width: '200', height: '25', theme: theme });
+               $("#aceptarRedimensionar").jqxButton({ width: '100px', theme:theme });
+               $("#cancelarRedimensionar").jqxButton({ width: '100px', theme:theme });
+               $("#aceptarBrillo").jqxButton({ width: '100px', theme:theme });
+               $("#cancelarBrillo").jqxButton({ width: '100px', theme:theme });
+               $("#jqxButton").jqxButton({ width: '150', theme: theme });
+               $("#inputRedimension").jqxInput({height: 25, width: 200, minLength: 1, theme: theme});
+               $("#inputBrillo").jqxInput({height: 25, width: 200, minLength: 1, theme: theme});
+               $("#inputRGB").jqxInput({height: 25, width: 200, minLength: 1, theme: theme});
+                $("#jqxWidgetPanel").jqxPanel({ width: 600, height: 250, theme: theme });
+                
+                var priceslider = $('#priceSlider');
+                                   priceslider.jqxSlider({theme: theme, mode: 'fixed',min: -127, max: 127,showTicks: false });
+                                   $('#events').jqxPanel({ theme: theme, height: '25px', width: '130px' });
+                                   var eventData2= "Valor: 0";
+                                   $('#events').jqxPanel('clearContent');
+                                   $('#events').jqxPanel('prepend', '<div class="item" style="margin-top: 5px;">' + eventData2 + '</div>');
+                                  $("#RGBdrop").jqxDropDownList({ source: source4,selectedIndex: 0,width: '200', height: '25', theme: theme });
+                                    $("#aceptarRGB").jqxButton({ width: '100px', theme:theme });
+                                    $("#cancelarRGB").jqxButton({ width: '100px', theme:theme });  
 				$("#jqxRadioButton").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false});
 				$("#jqxRadioButton2").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
 				$("#jqxRadioButton3").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
@@ -88,6 +109,9 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
 				$("#jqxRadioButton12").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
 				$("#jqxRadioButton13").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:false });
                                 $("#jqxRadioButton14").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:true });
+                                $("#jqxRadioButton15").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:true });
+                                $("#jqxRadioButton16").jqxRadioButton({ width: 140, height: 25, theme: theme,disabled:true });
+                               
                                 $("a.lightbox").lightbox();
 				
                                 $('#customWindow').jqxWindow({position: { x: 500, y: 500 },autoOpen: false, theme: theme, width: 350,
@@ -119,447 +143,7 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
        
                                  
                                 
-				$("#jqxButton").on('click', function () {
-				//capturo valores de los inputs
-                              
-                                if(archivo.value==""){
-                    
-                                $('#Msje').empty();
-                                $("#Msje").append("Debe seleccionar una Imagen a tratar.");
-                                $('#Titulo').empty();
-                                $("#Titulo").append("Aviso");
-                                $('#Botones').empty();
-                                $("#Botones").append(casoaviso);
-                                $("#popupAviso").jqxWindow('show');
-                                $("#aceptar1").jqxButton({ width: '100px', theme:theme });
-                                $('#aceptar1').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
-                                  }
-                                else
-                                {
-                                
-                               // comprobarFile();
-				var valor_dropdown = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-				var radio_buttoms= new Array();
-				radio_buttoms[0] = $("#jqxRadioButton").val();
-				radio_buttoms[1] = $("#jqxRadioButton2").val();
-				radio_buttoms[2] =$("#jqxRadioButton3").val();
-				radio_buttoms[3] =$("#jqxRadioButton4").val();
-				radio_buttoms[4] =$("#jqxRadioButton5").val();
-				radio_buttoms[5] =$("#jqxRadioButton6").val();
-				radio_buttoms[6] =$("#jqxRadioButton7").val();
-				radio_buttoms[7] =$("#jqxRadioButton8").val();
-				radio_buttoms[8] =$("#jqxRadioButton9").val();
-				radio_buttoms[9] =$("#jqxRadioButton10").val();
-				radio_buttoms[10] =$("#jqxRadioButton11").val();
-				radio_buttoms[11] =$("#jqxRadioButton12").val();
-				radio_buttoms[12] =$("#jqxRadioButton13").val();
-                                radio_buttoms[13] =$("#jqxRadioButton14").val();
-				//alert(valor_dropdown.index);
-				//alert(valor_dropdown.label);
 				
-				var decision;
-				
-				for(var i=0;i<=13;i++)
-				{
-				 if(radio_buttoms[i]==true)
-				 {
-				 contador=contador+1;
-				 decision=i;
-			   
-				 }
-				 
-				}
-				switch(decision)
-                                {
-                                
-                                case 1:
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                    //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex para ejecutar en secuencial o paralelo
-                                    $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":1},
-                                      async: false,
-                                      type: "post",
-                                         success: function(json) 
-                                        { 
-                              
-                               alert("se han enviado los datos correctamente");
-                                          },
-                                 error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                                }
-                             });
-                                //  alert("Escala de Grises");
-                                  break;
-                                case 2:
-                                  var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                    //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex para ejecutar en secuencial o paralelo
-                                     $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":2},
-                                      async: false,
-                                      type: "post",
-                                         success: function(json) 
-                                        { 
-                              
-                               alert("se han enviado los datos correctamente");
-                                          },
-                                 error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                                }
-                             });
-//alert("Efecto Reflejo");
-                                  break;
-                                
-                                case 4:
-                                    
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                   $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":4},
-                                      async: false,
-                                      type: "post",
-                                         success: function(json) 
-                                        { 
-                              
-                               alert("se han enviado los datos correctamente");
-                                          },
-                                 error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                                }
-                             });
-                                  //alert("Invertir Colores");
-                                  break;
-                                case 5:
-                                    
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                    //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                      $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":5},
-                                      async: false,
-                                      type: "post",
-                                         success: function(json) 
-                                        { 
-                              
-                               alert("se han enviado los datos correctamente");
-                                          },
-                                 error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                                }
-                             });
-                                  //alert("Traspuesta(90°)");
-                                  break;
-                                case 6:
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                    $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":6},
-                                      async: false,
-                                      type: "post",
-                                         success: function(json) 
-                                        { 
-                              
-                               alert("se han enviado los datos correctamente");
-                                          },
-                                 error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                                }
-                             });
-                                  
-                                        //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                  // alert("Traspuesta(180°)");
-                                  break;
-                                case 7:
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                    //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                     $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":7},
-                                      async: false,
-                                      type: "post",
-                                         success: function(json) 
-                                        { 
-                              
-                               alert("se han enviado los datos correctamente");
-                                          },
-                                 error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                                }
-                             });
-                                    //alert("Traspuesta(270°)");
-                                  break;
-                                case 8:
-                                   var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                      $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":8},
-                                      async: false,
-                                      type: "post",
-                            success: function(json) 
-                            { 
-                              
-                               alert("se han enviado los datos correctamente");
-			    },
-                            error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                            }
-                             });
-  //alert("Efecto Negativo");
-                                  break;
-                                case 9:
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                    //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                     $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":9},
-                                      async: false,
-                                      type: "post",
-                            success: function(json) 
-                            { 
-                              
-                               alert("se han enviado los datos correctamente");
-			    },
-                            error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                            }
-                              });
- // alert("Efecto Sepia");
-                                  break;
-                               
-                                  
-                                case 11:
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                     $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":11},
-                                      async: false,
-                                      type: "post",
-                            success: function(json) 
-                            { 
-                              
-                               alert("se han enviado los datos correctamente");
-			    },
-                            error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No!"); 
-                            }
-                            });
-                                   //alert("Invertir ");
-                                  break;
-                                case 12:
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                     $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":12},
-                                      async: false,
-                                      type: "post",
-                            success: function(json) 
-                            { 
-                              
-                               alert("se han enviado los datos correctamente");
-			    },
-                            error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No!"); 
-                            }
-                              });
-                                   //alert("Convolucion");
-                                  break;
-                                case 13:
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                    
-                                      $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"decision":13},
-                                      async: false,
-                                      type: "post",
-                            success: function(json) 
-                            { 
-                              
-                               alert("se han enviado los datos correctamente");
-			    },
-                            error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No!"); 
-                            }
-          });
-                                     //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo
-                                    
-                                 //  alert("Superposición de imagenes");
-                                  break;
-                                default:
-                                 comprobarTecnica();
-                                };
-                            
-                            }
-			    }); 
             function ahrefdiv() {
                
                var a = document.createElement("a"); 
@@ -609,8 +193,7 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
              $("#barra_de_progreso").val(0);
              if (respuesta === 1) {
                  ahrefdiv();
-               // imagendiv();
-            // alert('El archivo ha sido subido correctamente.');
+               
              } else {
                 $('#Msje').empty();
                 $("#Msje").append("La imagen no se ha podido procesar");
@@ -629,6 +212,11 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
              });
              }
              
+              $('#priceSlider').on('change', function (event) {
+                                 
+                                    displayEvent(event);
+                                     });
+                                     
              function ocultar_mostrar(div){
             owurl7 = document.getElementById(div);
             if(owurl7.style.display=='')
@@ -686,70 +274,25 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                 var checked = event.args.checked; 
      
                 if(checked==true){
-                 $("#jqxButton").jqxButton({disabled:true});    
-                $('#Msje').empty();
-                                    $("#Msje").append(InputsRedimensionar);
-                                    $('#Titulo').empty();
-                                    $("#Titulo").append("Redimensionar");
-                                    $('#Botones').empty();
-                                    $("#Botones").append(casoavisoRedimensionar);
-                                    $("#popupAviso").jqxWindow('show');
-                                    $("#Redimension").jqxDropDownList({ source: source3,selectedIndex: 3,width: '200', height: '25', theme: theme });
-                                    $("#aceptar").jqxButton({ width: '100px', theme:theme });
-                                    $("#cancelar").jqxButton({ width: '100px', theme:theme });
+               
+                                    $("#popupAvisoRedimensionar").jqxWindow('show');
+                                    
                                   
                                    
-                                    $('#aceptar').on('click', function () {
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                    var valorRed = $("#Redimension").jqxDropDownList('getSelectedItem'); 
-                                    var valorRedLabel=valorRed.label;
-                                    var valorRedIndex=valorRed.index;//0: -25%/1: -50%/ 2: -75 /3: 100%/4: 200%/5: 300%/ 6: 400%
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
-                                  //aqui se debe subir la imagen en conjunto de los parametros
-                                  //
-                                   
-                                    //&subirArchivos();
-                                    
-                               
-                            // var miJSON = JSON.encode(datos_ajax);
-                            
-                             $("#popupAviso").jqxWindow('close');
-                              $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"parametro":valorRedIndex,"decision":0},
-                                      async: false,
-                                      type: "post",
-                                         success: function(json) 
-                                        { 
-                              
-                               alert("se han enviado los datos correctamente");
-                                          },
-                                 error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                                }
-                             });
+                                   $('#aceptarRedimensionar').on('click', function () {
+                                       
+                                   $("#popupAvisoRedimensionar").jqxWindow('close');
+                                   document.form1.inputRedimension.value= document.form2.Redimension.value;
+                                                    
+                                  
                                     }); 
-                                    $('#cancelar').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
+                                    $('#cancelarRedimensionar').on('click', function () {$("#popupAvisoRedimensionar").jqxWindow('close');  }); 
                  
                 }
                else
                  if(checked==false)
                  {
-                   $("#jqxButton").jqxButton({disabled:false});   
+                
                  }
             });
             
@@ -757,73 +300,27 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
              var checked = event.args.checked; 
      
              if(checked==true){
-             $("#jqxButton").jqxButton({disabled:true});
+         
             
-            $('#Msje2').empty();
-                                    $("#Msje2").append(InputsBrillo);
-                                    $('#Titulo2').empty();
-                                    $("#Titulo2").append("Efecto Brillo");
-                                    $('#Botones2').empty();
-                                    $("#Botones2").append(casoavisoBrillo);
-                                    $("#popupAviso2").jqxWindow('show');              
-                                    $("#aceptarBrillo").jqxButton({ width: '100px', theme:theme });
-                                    $("#cancelarBrillo").jqxButton({ width: '100px', theme:theme });
-                                   var priceslider = $('#priceSlider');
-                                   priceslider.jqxSlider({theme: theme, mode: 'fixed',min: -127, max: 127,showTicks: false });
-                                   $('#events').jqxPanel({ theme: theme, height: '25px', width: '130px' });
-                                   var eventData2= "Valor: 0";
-                                   $('#events').jqxPanel('clearContent');
-                                    $('#events').jqxPanel('prepend', '<div class="item" style="margin-top: 5px;">' + eventData2 + '</div>');
-                                   //priceslider.jqxSlider({ showButtons: true, theme: theme, height: 30, min: -127, max: 127, step: 1, ticksFrequency: 350, mode: 'fixed', values: [500, 4000], rangeSlider: true,width: 180 });
-                                 // priceslider.jqxSlider({ min: -127, max: 127, ticksFrequency: 25.5, value: 0, step: 1, theme: theme,showTicks: true,showRange: true });
-                                 //  $('#redLevel').jqxSlider({ min: -127, max: 127, ticksFrequency: 25.5, value: 0, step: 1, theme: theme });
-                                   $('#cancelarBrillo').on('click', function () {$("#popupAviso2").jqxWindow('close');  }); 
-                                  $('#priceSlider').on('change', function (event) {
+           
+                                    $("#popupAvisoBrillo").jqxWindow('show');              
+                                    
+                               
+                                   $('#cancelarBrillo').on('click', function () {$("#popupAvisoBrillo").jqxWindow('close');  }); 
                                  
-                                    displayEvent(event);
-                                     });
                                      
                                      $('#aceptarBrillo').on('click', function () {
-                                      var nivel_brillo= $('#priceSlider').jqxSlider('getValue');//parametro nivel de brillo
-                                      
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                 
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos ... se debe ejecutar en paralelo
-                                   
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;//si es -1 entonces se debe ejecutar en secuencial       
-                                    }
+                                     
                                       //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo, más la variable nivel_brillo que te da el nivel de brillo                            
-                                       $("#popupAviso2").jqxWindow('close');   
-                                        $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"parametro":nivel_brillo,"decision":3},
-                                      async: false,
-                                      type: "post",
-                                         success: function(json) 
-                                        { 
-                              
-                               alert("se han enviado los datos correctamente");
-                                          },
-                                 error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                                }
-                             });
+                                      document.form1.inputBrillo.value= document.form3.priceSlider.value;  
+                                     $("#popupAvisoBrillo").jqxWindow('close');   
+                                      
                                     }); 
              }
              else
                  if(checked==false)
                  {
-                  $("#jqxButton").jqxButton({disabled:false});   
+               
                  }
             });
             
@@ -831,65 +328,25 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
              var checked = event.args.checked; 
      
              if(checked==true){
-             $("#jqxButton").jqxButton({disabled:true}); 
-            $('#Msje').empty();
-                                    $("#Msje").append(InputsRGB);
-                                    $('#Titulo').empty();
-                                    $("#Titulo").append("Técnica RGB");
-                                    $('#Botones').empty();
-                                    $("#Botones").append(casoavisoRGB);
-                                    $("#popupAviso").jqxWindow('show');
-                                    $("#RGBdrop").jqxDropDownList({ source: source4,selectedIndex: 0,width: '200', height: '25', theme: theme });
-                                    $("#aceptarRGB").jqxButton({ width: '100px', theme:theme });
-                                    $("#cancelarRGB").jqxButton({ width: '100px', theme:theme });
+            
+                                    $("#popupAvisoRGB").jqxWindow('show');
+                                    
                                   
                                   
                                     $('#aceptarRGB').on('click', function () {
                                       
-                                    var valorProc; 
-                                    var valorProcLabel;
-                                    var valorProcIndex;
-                                    var valorTipoProc = $("#jqxWidget").jqxDropDownList('getSelectedItem'); 
-                                    var valorRGB= $("#RGBdrop").jqxDropDownList('getSelectedItem'); 
-                                    var valorRGBLabel=valorRGB.label;
-                                    var valorRGBIndex=valorRGB.index; //0:verde / 1: azul / 2: rojo
-                                  
-                                    if(valorTipoProc.label=="Paralelo")
-                                    {
-                                    valorProc = $("#Procesos").jqxDropDownList('getSelectedItem'); 
-                                    valorProcLabel=valorProc.label;//label
-                                    valorProcIndex=valorProc.index;//0: 4 procesos/ 1: 18 procesos/ 2: 36 procesos/ 3: 60 procesos
-                                  
-                                    }
-                                    else
-                                    {
-                                    valorProcLabel="";
-                                    valorProcIndex=-1;
-                                  
-                                    }
-                                  
+                                    
+                                  document.form1.inputRGB.value= document.form4.RGBdrop.value;
                                      //Aqui debes capturar la imagen y enviar al archivo php con el parámetro valorProcIndex  para ejecutar en secuencial o paralelo, más la variable valorRGBIndex que determina la tecnica RGB a implementar
-                                     $("#popupAviso").jqxWindow('close');
-                                     $.ajax({  url: 'interior.php',
-                                      data:{"valor":valorProcIndex,"parametro":valorRGBIndex,"decision":10},
-                                      async: false,
-                                      type: "post",
-                                         success: function(json) 
-                                        { 
-                              
-                               alert("se han enviado los datos correctamente");
-                                          },
-                                 error:function (xhr, ajaxOptions, thrownError) {
-                                 alert("No se han cargado los datos correctamente"); 
-                                }
-                             });
+                                     $("#popupAvisoRGB").jqxWindow('close');
+                               
                                     }); 
-                                    $('#cancelarRGB').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
+                                    $('#cancelarRGB').on('click', function () {$("#popupAvisoRGB").jqxWindow('close');  }); 
              }
              else
                  if(checked==false)
                  {
-                  $("#jqxButton").jqxButton({disabled:false});    
+                //  $("#jqxButton").jqxButton({disabled:false});    
                  }
             });
             
@@ -905,7 +362,7 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
             // get item's label and value.
             var label = item.label;
             var value = item.value;
-                    if(label=="Filtros"){
+                    if(label=="Técnicas"){
                     $("#jqxRadioButton").jqxRadioButton({disabled:false});
                     $("#jqxRadioButton2").jqxRadioButton({disabled:false});
                     $("#jqxRadioButton3").jqxRadioButton({disabled:false});
@@ -920,7 +377,10 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                     $("#jqxRadioButton12").jqxRadioButton({disabled:false});
                     $("#jqxRadioButton13").jqxRadioButton({disabled:false});
                     $("#jqxRadioButton14").jqxRadioButton({disabled:true});
-                    $('#jqxRadioButton').jqxRadioButton({ checked:true });
+                    $("#jqxRadioButton15").jqxRadioButton({disabled:true});
+                    $("#jqxRadioButton16").jqxRadioButton({disabled:true});
+                    $("#jqxWidget").jqxDropDownList('enableItem', "Paralelo" ); 
+                  //  $('#jqxRadioButton').jqxRadioButton({ checked:true });
                     }
                     else{
                     $("#jqxRadioButton").jqxRadioButton({disabled:true});
@@ -937,7 +397,11 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                     $("#jqxRadioButton12").jqxRadioButton({disabled:true});
                     $("#jqxRadioButton13").jqxRadioButton({disabled:true});
                     $("#jqxRadioButton14").jqxRadioButton({disabled:false});
-                    $('#jqxRadioButton14').jqxRadioButton({ checked:true });
+                    $("#jqxRadioButton15").jqxRadioButton({disabled:false});
+                    $("#jqxRadioButton16").jqxRadioButton({disabled:false});
+                    $("#jqxWidget").jqxDropDownList('disableItem', "Paralelo" ); 
+                    
+                   // $('#jqxRadioButton14').jqxRadioButton({ checked:true });
                     }
                      
             }                        
@@ -956,9 +420,7 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
                         $("#aceptar1").jqxButton({ width: '100px', theme:theme });
                         $('#aceptar1').on('click', function () {$("#popupAviso").jqxWindow('close');  }); 
 		}
-                
-                    
-               
+                          
 	}
         
       
@@ -1010,6 +472,7 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
   <div class="about">
    <h2>Complete la Solicitud</h2>
    <h3>Debe indicar el tipo de tratamiento a implementar en las imágenes.</h3>
+   <form name="form1" action="interior.php" method="post" enctype="multipart/form-data">
        <table>
        <tr>
        <td><p>Seleccione la imagen a tratar:</p><input type="file" name="archivo" id="archivo"/></td>    
@@ -1032,11 +495,23 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
        </div></td>
        </tr>
        <tr>
-           <td></td>
-       </tr>                        
+           
+           <td><input type="hidden" id="inputRedimension" name="inputRedimension"/>  </td>
+       </tr> 
+       <tr> 
+           <td><input type="hidden" id="inputBrillo" name="inputBrillo"/>  </td>
+       </tr> 
+       <tr> 
+           <td><input type="hidden" id="inputRGB" name="inputBrillo"/>  </td>
+       </tr>     
+        
        </table>
 	 <div id='jqxWidgetPanel' style=" font-size: 13px; font-family: Verdana;">
 	<table>
+            <tr>
+            <td><b>Técnicas</b></td>    
+            </tr>
+            
 	<tr>
 		<td><div style='margin-top: 10px;' id='jqxRadioButton'>
             <span>Redimensionar</span></div></td>
@@ -1072,22 +547,34 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
 	<tr>
 		<td> <div style='margin-top: 10px;' id='jqxRadioButton13'>
             <span>Convolución</span></div></td>
-	    <td> <div style='margin-top: 10px;' id='jqxRadioButton14'>
-            <span>Superposición de Imágenes</span></div></td>
+	   
 				
-	</tr>
+	</tr></table>
+         <table>
+         <tr>
+            <td><b>Animaciones</b></td>    
+            </tr>
+         <tr>         
+             <td> <div style='margin-top: 10px;' id='jqxRadioButton14'>
+            <span>Panorámica</span></div></td>
+              <td> <div style='margin-top: 10px;' id='jqxRadioButton15'>
+            <span>Amanecer</span></div></td>
+              <td> <div style='margin-top: 10px;' id='jqxRadioButton16'>
+            <span>Terremoto</span></div></td>
+             
+         </tr>
+         
 	</table>
 	</div>
         <table >
         <tr>
             
-	<td><input type="button" value="Aceptar" id='jqxButton' /></td>
+	<td><input type="submit" value="Aceptar" id='jqxButton' /></td>
         </tr>
-        <tr>    
-        <td><p> Progreso  <progress id="barra_de_progreso" value="0" max="100"></p></progress></td> 
-    
-        </tr>
+       
         </table>
+       </form>
+       
    <div class="date">
     <div class="left">Miércoles, Nov 27/2013 &nbsp;&nbsp;|</div>
     
@@ -1192,5 +679,42 @@ $("#Msje2").jqxPanel({ width: 380, height: 120, theme: theme });
         <div id='Botones2' style="margin-top:10px; margin-right: 20px;"> </div>
     </div>
 </div>   
+    
+    <div id='popupAvisoRedimensionar'>
+    <div id='TituloRedimensionar'>Redimensionar</div>
+    <div id='ContenidoAvisoRedimensionar'>
+    <form name="form2">
+    <div><center>Seleccione el parametro para ejecutar la redimensión<br></center></div>
+       <center><Table><tr><td>Porcentaje:</td><td><div id='Redimension'style='margin-right:20px;'/></td></tr></table></center>
+        <div id='Botones2' style="margin-top:10px; margin-right: 20px;"> </div>
+        <div><center><input type='button' value='Aceptar' id='aceptarRedimensionar'style='margin-right:20px;'/><input type='button' value='Cancelar' id='cancelarRedimensionar'style='margin-right:10px;'/></center></div>
+       </form>
+       </div>
+ </div>
+    
+    <div id='popupAvisoBrillo'>
+    <div id='TituloBrillo'>Efecto Brillo</div>
+    <div id='ContenidoAvisoBrillo'>
+    <form name="form3">
+    <div><center>Seleccione el nivel de Brillo<br></center></div>
+    <center><Table><tr><td>Nivel:</td><td><div id='priceSlider'style='margin-right:20px;'/></td></tr></table></center>
+    <div id='events'></div>
+    <div><center><input type='button' value='Aceptar' id='aceptarBrillo'style='margin-right:20px;'/><input type='button' value='Cancelar' id='cancelarBrillo'style='margin-right:10px;'/></center></div>
+       </form>
+       </div>
+ </div>
+    
+    <div id='popupAvisoRGB'>
+    <div id='TituloRGB'>Efecto RGB</div>
+    <div id='ContenidoAvisoRGB'>
+    <form name="form4">
+    <div><center>Seleccione la técnica RGB a implementar<br></center></div>
+       <center><Table><tr><td>Técnica:</td><td><div id='RGBdrop'style='margin-right:20px;'/></td></tr></table></center>
+        <div id='Botones2' style="margin-top:10px; margin-right: 20px;"> </div>
+        <div><center><input type='button' value='Aceptar' id='aceptarRGB'style='margin-right:20px;'/><input type='button' value='Cancelar' id='cancelarRGB'style='margin-right:10px;'/></center></div>
+       </form>
+       </div>
+ </div>
+    
 </body>
 </html>
